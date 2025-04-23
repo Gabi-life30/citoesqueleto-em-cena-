@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citoesqueleto em Cena</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+            font-size: 1em;
+        }
+        header {
+            background-color: #2a9d8f;
+            color: white;
+            padding: 1.5em 0;
+            text-align: center;
+            margin-bottom: 1.5em;
+            background-image: linear-gradient(90deg, rgba(42, 157, 143, 0.8), rgba(42, 157, 143, 1), rgba(42, 157, 143, 0.8));
+            background-size: 200% 100%;
+            animation: gradientAnimation 5s linear infinite alternate;
+        }
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        h1 {
+            font-size: 2em;
+            display: inline-block;
+        }
+        h1 i {
+            font-size: 1em;
+            margin: 0 0.2em;
+            animation: pulse 1.5s ease-in-out infinite alternate;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); color: #e9c46a; }
+            50% { transform: scale(1.1); color: #f4a261; }
+            100% { transform: scale(1); color: #e9c46a; }
+        }
+        h1 span {
+            color: white;
+        }
+        h1 span:first-child {
+            color: #f4a261;
+        }
+        h1 span:last-child {
+            color: #e9c46a; }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 1.5em;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h2 {
+            color: #264653;
+            border-bottom: 3px solid #e9c46a;
+            padding-bottom: 0.3em;
+            margin-top: 1.2em;
+            font-size: 1.5em;
+        }
+        h3 {
+            color: #2a9d8f;
+            margin-bottom: 0.3em;
+            font-size: 1.2em;
+        }
+        .analogy-item {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            margin-bottom: 1.5em;
+            padding: 1em;
+            border: 1px solid #f4a261;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+        .analogy-item img {
+            max-width: 1000px; /* Mantendo a largura máxima para não estourar o container */
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1em; /* Ajustando a margem inferior */
+        }
+        .analogy-comparison {
+            display: flex;
+            gap: 1em;
+            align-items: center;
+            margin-bottom: 0.5em;
+            justify-content: center;
+        }
+        .analogy-comparison img:first-child {
+            max-width: 480px; /* Dobro da largura original (~240px) */
+            height: auto;
+        }
+        .analogy-comparison img:last-child {
+            max-width: 960px; /* Quádruplo da largura original (~240px) */
+            height: auto;
+        }
+        .analogy-text {
+            flex-grow: 1;
+        }
+        #home {
+            text-align: center;
+        }
+        #home p {
+            margin-bottom: 0.8em;
+        }
+        #home a {
+            color: #264653;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 0.8em;
+        }
+        #home a:hover {
+            text-decoration: underline;
+        }
+        #home .intro-images {
+            display: flex;
+            justify-content: center;
+            gap: 2em;
+            margin-bottom: 2em;
+            flex-direction: column;
+            align-items: center;
+        }
+        #home .intro-images img {
+            max-width: 127%; /* Mantendo as dimensões ajustadas anteriormente */
+            height: auto;
+            max-height: 800px; /* Mantendo as dimensões ajustadas anteriormente */
+            border-radius: 8px;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 1em; /* Ajustando a margem inferior */
+        }
+        #citoesqueleto p {
+            margin-bottom: 0.8em;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.7em;
+            }
+            h1 i {
+                font-size: 0.9em;
+            }
+            .container {
+                padding: 1em;
+            }
+            h2 {
+                font-size: 1.4em;
+            }
+            h3 {
+                font-size: 1.1em;
+            }
+            .analogy-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 0.8em;
+            }
+            .analogy-item img {
+                max-width: 196%; /* Metade de 392% */
+            }
+            .analogy-comparison {
+                flex-direction: row;
+                justify-content: center;
+                gap: 0.4em;
+            }
+            .analogy-comparison img {
+                max-width: 180px; /* Metade de 360px */
+            }
+            .analogy-comparison img:first-child {
+                max-width: 360px; /* Dobro da largura original (~180px) */
+            }
+            .analogy-comparison img:last-child {
+                max-width: 720px; /* Quádruplo da largura original (~180px) */
+            }
+            #home .intro-images img {
+                max-width: 130%; /* Mantendo as dimensões ajustadas anteriormente */
+                max-height: none; /* Remover altura máxima em telas menores */
+            }
+        }
+
+        .analogy-item p {
+            margin-bottom: 0.6em;
+        }
+        #citoesqueleto h2 + p {
+            margin-top: 0.8em;
+        }
+        #citoesqueleto p + p {
+            margin-top: 0.5em;
+        }
+
+        /* Estilos para a seção Quem Somos */
+        #quem-somos {
+            padding: 1.5em;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            margin-top: 2em;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        #quem-somos h2 {
+            color: #2a9d8f;
+            border-bottom: 2px solid #2a9d8f;
+            padding-bottom: 0.3em;
+            margin-bottom: 1em;
+        }
+
+        #quem-somos p {
+            margin-bottom: 0.8em;
+        }
+
+        #quem-somos ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #quem-somos li {
+            margin-bottom: 0.5em;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-dna"></i> <span>Citoesqueleto em Cena:</span> <i class="fas fa-city"></i> <span>A Cidade Dentro da Célula</span></h1>
+    </header>
+    <div class="container">
+        <section id="home">
+            <div class="intro-images">
+                <img src="imagem/citoesqueleto.webp" alt="ilustração geral do citoesqueleto" style="max-width: 127%; max-height: 800px;">
+                <img src="imagem/cidade.jpg" alt=" aérea da cidade de São Paulo" style="max-width: 127%; max-height: 800px;">
+            </div>
+            <p>Imagine o interior de uma célula viva como uma metrópole vibrante e complexa, pulsando com atividade incessante. Ruas movimentadas, estruturas imponentes e um sistema de transporte eficiente são essenciais para o seu funcionamento. Surpreendentemente, no mundo microscópico das nossas células, existe uma contraparte dessa organização urbana: o citoesqueleto.</p>
+            <div>
+                <a href="#analogia">Entenda a Analogia</a> | <a href="#citoesqueleto">Descobrindo o Citoesqueleto</a> | <a href="#quem-somos">Quem Somos</a>
+            </div>
+        </section>
+
+        <section id="analogia">
+            <h2>A Célula como uma Metrópole: Desvendando o Citoesqueleto</h2>
+
+            <div class="analogy-item">
+                <h3>Microtúbulos: As Rodovias da Célula</h3>
+                <div class="analogy-comparison">
+                    <img src="imagem/rodovias-micro.jpg" alt="rodovias-micro" style="max-width: 480px;">
+                    <span>↔</span>
+                    <img src="imagem/micro-rodovias.jpg" alt=" micro-rodovias" style="max-width: 960px;">
+                </div>
+                <p>Assim como as rodovias de uma cidade são essenciais para o fluxo de pessoas e mercadorias, os microtúbulos atuam como as principais vias de transporte dentro da célula, permitindo a circulação de substâncias e organelas de um ponto a outro.</p>
+                <p>Na célula, os microtúbulos são cilindros ocos formados por dímeros de tubulina, responsáveis pelo transporte intracelular de vesículas, posicionamento de organelas e formação do fuso mitótico durante a divisão celular.</p>
+            </div>
+
+            <div class="analogy-item">
+                <h3>Filamentos de Actina: As Calçadas da Dinâmica Celular</h3>
+                <div class="analogy-comparison">
+                    <img src="imagem/calçada-actina.jpg" alt="calçada-actina" style="max-width: 480px;">
+                    <span>↔</span>
+                    <img src="imagem/actina-calçada.jpg" alt="actina-calçada" style="max-width: 240px;">
+
+                </div>
+                <p>Se as rodovias são para o tráfego principal, os filamentos de actina seriam as calçadas e ruas menores, permitindo movimentos mais localizados e mudanças rápidas na forma da célula, como a movimentação de pedestres e pequenos veículos.</p>
+                <p>Na célula, os filamentos de actina são os mais finos e estão envolvidos na movimentação celular, contração muscular (em células musculares) e na manutenção da forma da célula, especialmente na sua periferia, logo abaixo da membrana plasmática.</p>
+            </div>
+
+            <div class="analogy-item">
+                <h3>Filamentos Intermediários: Os Pilares da Integridade Celular</h3>
+                <div class="analogy-comparison">
+                    <img src="imagem/predios- intermediarios.jpg" alt="predios-intermediarios" style="max-width: 480px;">
+                    <span>↔</span>
+                    <img src="imagem/intermediarios- predios.jpg" alt="intermediarios- predios" style="max-width: 960px;">
+                </div>
+                <p>Assim como os edifícios e as estruturas de suporte conferem estabilidade e sustentação a uma cidade, os filamentos intermediários atuam como os pilares da célula, proporcionando resistência mecânica e ajudando a manter a integridade estrutural.</p>
+                <p>Na célula, os filamentos intermediários são mais robustos e compostos por diversas proteínas, dependendo do tipo celular. Eles têm uma função primária de conferir resistência a tensões mecânicas e ajudar a ancorar organelas, como o núcleo, dentro do citoplasma.</p>
+            </div>
+        </section>
+
+        <section id="citoesqueleto">
+            <h2>Por Dentro da Célula: Uma Visão Detalhada do Citoesqueleto</h2>
+            <p>Assim como uma cidade possui uma infraestrutura complexa que sustenta suas atividades, a célula eucariótica conta com o citoesqueleto, uma rede dinâmica e altamente organizada de filamentos proteicos presente em seu citoplasma. Essa rede é fundamental para diversas funções, desde a manutenção da forma celular até o transporte interno e a organização espacial.</p>
+
+            <h3>Os Microtúbulos: As "Rodovias" Moleculares</h3>
+            <p>Os <strong>microtúbulos</strong> são polímeros longos e ocos, formados por subunidades da proteína <strong>tubulina</strong>. Assim como as grandes avenidas e rodovias de uma cidade, eles atuam como as principais vias de transporte dentro da célula. Possuem polaridade, com extremidades positiva e negativa, que direcionam o movimento de moléculas e organelas. Além do transporte intracelular, os microtúbulos são cruciais na formação do <strong>fuso mitótico</strong> durante a divisão celular, garantindo a separação precisa dos cromossomos.</p>
+
+            <h3>Os Filamentos de Actina: A Dinâmica "Pavimentação" Celular</h3>
+            <p>Os <strong>filamentos de actina</strong>, também conhecidos como <strong>microfilamentos</strong>, são polímeros finos e flexíveis da proteína <strong>actina</strong>. Concentrados principalmente na periferia da célula, como as calçadas e ruas menores de uma cidade, eles estão envolvidos em movimentos celulares mais localizados e na manutenção da forma. São essenciais para processos como a <strong>contração muscular</strong> (em células musculares), a formação de <strong>pseudópodes</strong> para o movimento de células como amebas, a <strong>endocitose</strong> (internalização de materiais pela célula) e a sustentação da membrana plasmática.</p>
+
+            <h3>Os Filamentos Intermediários: A "Arquitetura" de Sustentação</h3>
+            <p>Os <strong>filamentos intermediários</strong> são estruturas fibrosas mais estáveis e resistentes à tensão mecânica, funcionando como os edifícios e pilares que dão suporte à estrutura geral de uma cidade. Diferentemente dos microtúbulos e filamentos de actina, não possuem polaridade e são formados por uma variedade de proteínas, como a <strong>queratina</strong> (encontrada em células epiteliais, como as da pele) e a <strong>vimentina</strong> (presente em fibroblastos, um tipo de célula do tecido conjuntivo). Sua principal função é fornecer resistência estrutural e ancorar organelas, como o núcleo, dentro do citoplasma.</p>
+
+            <p>Além de suas funções mecânicas e de transporte, o citoesqueleto participa ativamente da <strong>sinalização celular</strong>, interagindo com diversas vias moleculares e influenciando processos como o crescimento, a diferenciação e a resposta a estímulos externos. A capacidade do citoesqueleto de se remodelar constantemente, através da montagem e desmontagem de seus filamentos, permite que a célula se adapte rapidamente a mudanças no ambiente e realize suas complexas funções de maneira eficiente.</p>
+
+            <p>Em síntese, o citoesqueleto é uma infraestrutura essencial para a vida da célula eucariótica, atuando como um sistema de suporte, transporte e organização que possibilita a complexidade e o dinamismo dos processos celulares, de forma análoga à infraestrutura que sustenta uma cidade.</p>
+        </section>
+
+        <section id="quem-somos">
+            <h2>Quem Somos</h2>
+            <p>Este projeto, intitulado "Citoesqueleto em Cena: A Cidade Dentro da Célula", foi desenvolvido como parte das atividades da disciplina de Bases Biológicas da Psicologia do curso de Psicologia. Somos estudantes dedicados a explorar as fascinantes interconexões entre a biologia e o comportamento humano.</p>
+            <p>Conheça os integrantes deste projeto:</p>
+            <ul>
+                <li>Carolina Aparecida Leopoldino Da Silva </li>
+                <li>Gabriela Moreira Alves Florêncio </li>
+                <li>Gabriela Teixeira Miranda </li>
+                <li>Gleisa Carvalho da Costa <li>
+                <li>Karina Francia Fernandes Silva </li>
+                <li>Maria Eduarda Lima De Melo </li>
+                <li>Rosenilda dos Santos lima </li>
+                <li>Tamires Sevieri Chagas </li>
+                <li>Thais Aredes Lucas </li>
+                <li>Tatiane Moschella de Oliveira </li>
+            </ul>
+        </section>
